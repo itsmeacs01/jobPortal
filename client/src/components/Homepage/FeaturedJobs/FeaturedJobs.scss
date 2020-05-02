@@ -1,0 +1,29 @@
+.jobs {
+  width: 95%;
+  text-align: center;
+  margin: 0 auto;
+  &__heading {
+    margin-top: 3rem;
+    font-weight: 500;
+    font-size: 300%;
+    margin-bottom: 2rem;
+  }
+  &__more:link,
+  &__more:visited {
+    display: inline-block;
+    padding: 1rem 4rem;
+    background-color: #0172c2;
+    color: #fff;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in;
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+
+  &__more:active,
+  &__more:hover {
+    cursor: pointer;
+    background-color: darken($color: #0172c2, $amount: 10);
+  }
+}

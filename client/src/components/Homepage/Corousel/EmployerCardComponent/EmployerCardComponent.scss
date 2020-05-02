@@ -1,0 +1,44 @@
+.employer-card {
+  display: flex;
+  margin: 10px;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  border: 0.5px solid rgba(199, 188, 188, 0.459);
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 1rem rgba(148, 138, 138, 0.178);
+
+  &__img {
+    width: 30%;
+    height: 30%;
+    border-radius: 45%;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+  &__title {
+    display: grid;
+    grid-template-columns: max-content;
+  }
+  &__location {
+  }
+  &__number:link,
+  &__number:visited {
+    text-decoration: none;
+    color: rgb(170, 159, 159);
+    padding: 0.2rem 1rem;
+    border: 0.4px solid #ccc;
+    border-radius: 200px;
+  }
+  &__number:hover {
+    background-color: rgb(22, 22, 156);
+    color: #fff;
+    outline: none;
+    border: none;
+  }
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #0f6dcc !important;
+}

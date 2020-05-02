@@ -1,0 +1,56 @@
+.category {
+  padding: 2rem;
+  background-image: linear-gradient(
+      to right,
+      rgba(47, 42, 63, 0.877),
+      rgba(29, 25, 43, 0.671)
+    ),
+    url("../img/simon-abrams-k_T9Zj3SE8k-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-align: center;
+  &__heading {
+    margin: 0 auto;
+    width: 60vw;
+    text-align: center;
+
+    &--text {
+      display: inline;
+      font-size: 250%;
+      font-weight: 500;
+    }
+    &--desc {
+      padding: 0.5rem;
+      font-size: 1.1rem;
+      span {
+        display: inline-block;
+      }
+    }
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  &__browse {
+    display: inline;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 1rem 3.6rem;
+    border: none;
+    outline: none;
+    background-color: #0078ce;
+    transition: all 0.5s ease-in;
+    &:hover {
+      background-color: darken($color: #0172c2, $amount: 10);
+      cursor: pointer;
+    }
+  }
+}

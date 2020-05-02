@@ -1,0 +1,56 @@
+.sidebar {
+  padding: 2rem 0;
+  text-align: center;
+  background-color: #e0e0e0;
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  figure {
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    figcaption {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    span {
+      color: #616161;
+      font-size: 1rem;
+    }
+  }
+
+  &-nav {
+    width: 100%;
+
+    &-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      width: 100%;
+
+      &__item {
+        padding: 1rem 0;
+        margin-top: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        background: #4489ffd0;
+        color: #fff;
+        transition: all 0.3s ease-in;
+
+        &:hover {
+          background-color: darken($color: #4489ffd0, $amount: 10);
+          cursor: pointer;
+        }
+      }
+      .active {
+        background-color: darken($color: #4489ffd0, $amount: 10);
+        cursor: pointer;
+      }
+    }
+  }
+}

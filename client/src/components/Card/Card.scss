@@ -1,0 +1,25 @@
+.User {
+  &__image {
+    background-image: url(./profile.jpg);
+    height: 140px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  &-content {
+    &__name {
+      font-weight: 600;
+    }
+    &__desc {
+    }
+    &__category {
+      font-weight: 600;
+    }
+  }
+  &__btn {
+    border: none;
+    padding: 0.5rem;
+    background-color: #006dcb;
+    color: #fff;
+    border-radius: 5px;
+  }
+}

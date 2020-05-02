@@ -1,0 +1,191 @@
+.main-menu {
+  .horizonatal-nav {
+    display: none !important;
+  }
+
+  .drawer {
+    .menu-icon {
+      display: flex;
+      color: #0088fe;
+      margin-top: 0.5rem;
+      margin-left: 1rem;
+      justify-content: space-between;
+      top: 3%;
+      left: 2%;
+      p {
+        font-size: 200%;
+        color: #000;
+        span {
+          color: rgb(36, 36, 173);
+        }
+      }
+    }
+  }
+  .show-drawer {
+    width: 35%;
+  }
+
+  .back-icon {
+    background-color: #655d91;
+    padding: 0.5rem;
+    text-align: end;
+    margin-top: 1rem;
+    color: #fff;
+    margin-bottom: 0.2rem;
+  }
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    letter-spacing: 0.2rem;
+
+    ul {
+      width: 100%;
+      list-style: none;
+      padding: 0;
+
+      li {
+        text-align: left;
+        width: 100%;
+        padding: 0.8rem;
+        transition: all 0.3s ease-in;
+        &:hover {
+          background-color: #655d91;
+          display: block;
+          width: 100%;
+          cursor: pointer;
+          a:link,
+          a:visited {
+            color: #fff;
+          }
+        }
+
+        a:link,
+        a:visited {
+          text-decoration: none;
+          color: #000;
+        }
+      }
+    }
+    .fa {
+      margin-right: 1.5rem;
+    }
+  }
+}
+
+@media (min-width: 1150px) {
+  .drawer {
+    display: none !important;
+  }
+  .main-menu .horizonatal-nav {
+    display: block !important;
+    nav {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 0.5rem 0 0.5rem 0;
+
+      align-items: center;
+      z-index: 100;
+      padding: 1rem 2rem 0 2rem;
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &:first-child {
+          padding: 0;
+        }
+
+        li {
+          list-style: none;
+          vertical-align: middle;
+          padding: 0.7rem 1.9rem;
+          text-align: center;
+          &:hover {
+            background-color: transparent;
+            display: block;
+            width: 100%;
+            cursor: pointer;
+          }
+          &:first-child {
+            padding: 0;
+          }
+          a:link,
+          a:visited {
+            font-size: 1rem;
+            text-decoration: none;
+            font-size: 0.98rem;
+            text-transform: uppercase;
+            color: #555;
+          }
+          &:hover a {
+            color: rgb(0, 136, 254);
+          }
+        }
+      }
+      .nav--right {
+        width: 70%;
+        .login {
+          width: 70%;
+          margin-left: 12%;
+        }
+      }
+      span,
+      p {
+        font-size: 1.5rem;
+      }
+      span {
+        color: rgb(0, 136, 254);
+      }
+
+      .register {
+        background-color: rgb(0, 136, 254);
+        color: #fff;
+        padding: 1rem 0.5rem;
+        width: 60%;
+
+        a:link,
+        a:visited {
+          color: #fff;
+        }
+        &:hover {
+          background-color: darken($color: rgb(0, 136, 254), $amount: 10);
+          color: #fff;
+          width: 60%;
+        }
+      }
+      .fa {
+        margin-right: 0rem;
+        padding-right: 0.4rem;
+      }
+    }
+  }
+}
+
+.root__el {
+  background: linear-gradient(
+    to right bottom,
+    rgba(150, 143, 143, 0.637),
+    rgba(189, 176, 176, 0.699)
+  );
+}
+.popover {
+  width: 45%;
+  padding: 2rem 2rem;
+  text-align: center;
+  margin-top: 1.1rem;
+}
+.register-popover {
+  margin-left: -16%;
+}
+
+.login__handle {
+  font-size: 1.1rem;
+  &:hover {
+    color: rgb(0, 136, 254);
+  }
+}

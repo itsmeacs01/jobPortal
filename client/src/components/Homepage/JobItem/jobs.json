@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Product Design",
+    "location": "Dhangadhi, Nepal",
+    "salary": "4000-5000",
+    "type": "Full Time",
+    "deadline": "2076/50/10"
+  },
+  {
+    "name": "HTML CSS",
+    "location": "Kathmandu, Nepal",
+    "salary": "4000-5000",
+    "type": "Internship",
+    "deadline": "2076/50/10"
+  },
+  {
+    "name": "Graphics Design",
+    "location": "Kathmandu, Nepal",
+    "salary": "4000-5000",
+    "type": "Internship",
+    "deadline": "2076/50/10"
+  },
+  {
+    "name": "Manager and Health",
+    "location": "Kathmandu, Nepal",
+    "salary": "4000-5000",
+    "type": "Internship",
+    "deadline": "2076/50/10"
+  }
+]

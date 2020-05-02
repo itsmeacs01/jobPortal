@@ -1,0 +1,24 @@
+.corousel {
+  margin: 0 auto;
+  width: 95vw;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  text-align: center;
+
+  .text {
+    font-weight: 600;
+    color: rgb(56, 56, 110);
+    display: inline-block;
+    &__heading {
+      font-size: 250%;
+    }
+
+    &__description {
+      color: rgb(90, 83, 83);
+      font-weight: 300;
+      span {
+        display: block;
+      }
+    }
+  }
+}

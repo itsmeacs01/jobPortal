@@ -1,0 +1,72 @@
+.userRole {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 2rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
+  color: #fff;
+  &__text {
+    font-size: 250%;
+    font-weight: 600;
+  }
+  p {
+    margin-top: 0.5rem;
+  }
+  &__btn {
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+}
+
+.black {
+  background-image: linear-gradient(
+      to right,
+      rgba(20, 19, 19, 0.932),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("../img/helloquence-5fNmWej4tAA-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.blue {
+  background: linear-gradient(
+      to right,
+      rgba(117, 100, 171, 0.877),
+      rgba(117, 100, 171, 0.671)
+    ),
+    url("../img/helloquence-5fNmWej4tAA-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.black-btn {
+  background-color: #fff;
+  color: blue;
+
+  outline: none;
+  &:hover {
+    background-color: #ccc;
+  }
+}
+.blue-btn {
+  background-color: rgba(13, 112, 211, 0.712);
+  color: #fff;
+  outline: none;
+  &:hover {
+    background-color: rgb(15, 110, 204);
+  }
+}

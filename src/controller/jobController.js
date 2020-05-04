@@ -9,11 +9,15 @@ exports.jobView = async (req, res, next) => {
   }
 };
 
-exports.jobController = async (req, res, next) => {
+exports.jobCreate = async (req, res, next) => {
   try {
     const job = new Job(req.body);
-    const createdJob = await job.save();
-    res.json(createdJob);
+    const jobCreated = await job.save();
+    if (jobCreated) {
+      res.status(200).json({
+        message: 'Job created successfully',
+      });
+    }
   } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(422);

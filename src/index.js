@@ -37,7 +37,13 @@ const userRouter = require('./router/userRouter');
 
 app.use(express.json());
 app.use(volleyball);
+
 app.use('/', userRouter);
+
+// job handler
+const jobRouter = require('./router/jobRouter');
+
+app.use('/job', jobRouter);
 
 const { notFound, errorHanlder } = require('./error');
 

@@ -18,7 +18,7 @@ const Sidebar = props => {
     <div className="sidebar">
       <figure>
         <img src={logo} alt="user-image" />
-        <figcaption>Subina Tamang</figcaption>
+        <figcaption>Kim Jong-un</figcaption>
         <span>Company Name</span>
       </figure>
 

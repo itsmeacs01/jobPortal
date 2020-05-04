@@ -13,7 +13,7 @@ const jobSchema = new mongoose.Schema({
     type: Array,
   },
   jobSalary: {
-    type: Number,
+    type: String,
     required: true,
     default: 'Negotiable',
   },

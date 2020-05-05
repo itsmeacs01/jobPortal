@@ -20,7 +20,9 @@ exports.jobCreate = async (req, res, next) => {
     }
   } catch (error) {
     if (error.name === 'ValidationError') {
-      res.status(422);
+      res.status(422).json({
+        message: 'Failed to create job',
+      });
     }
     next(error);
   }

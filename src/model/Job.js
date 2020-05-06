@@ -9,16 +9,13 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  jobPostedEmployersId: {
-    type: Array,
-  },
   jobSalary: {
     type: String,
     required: true,
-    default: 'Negotiable',
   },
   jobCategory: {
     type: String,
+    required: true,
   },
   jobCreatedAt: {
     type: Date,
@@ -33,9 +30,6 @@ const jobSchema = new mongoose.Schema({
     required: true,
     min: 10,
     max: 500,
-  },
-  jobAppliedEmployeeIds: {
-    type: Array,
   },
   jobType: {
     type: String,

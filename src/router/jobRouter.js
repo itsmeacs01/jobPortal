@@ -2,9 +2,9 @@ const express = require('express');
 
 const jobRouter = express.Router();
 
-const { jobCreate, jobView } = require('../controller/jobController');
+const { createJob, viewJob } = require('../controller/jobController');
 
-jobRouter.get('/view', jobView);
-jobRouter.post('/create', jobCreate);
+jobRouter.get('/view', viewJob);
+jobRouter.post('/create', createJob);
 
 module.exports = jobRouter;

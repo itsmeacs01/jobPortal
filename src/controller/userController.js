@@ -9,7 +9,7 @@ exports.userSignup = async (req, res, next) => {
     const validationSchema = joi.object({
       fullName: joi.string().trim().required(),
       username: joi.string().trim().required(),
-      password: joi.string().trim().min(8),
+      password: joi.string().min(8),
       email: joi.string().trim().email({
         minDomainSegments: 2,
         tlds: {

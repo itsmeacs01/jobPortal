@@ -1,6 +1,8 @@
+const joi = require('@hapi/joi');
+
 const Job = require('../model/Job');
 
-exports.jobView = async (req, res, next) => {
+exports.viewJob = async (req, res, next) => {
   try {
     const jobEntries = await Job.find();
     res.json(jobEntries);
@@ -9,14 +11,44 @@ exports.jobView = async (req, res, next) => {
   }
 };
 
-exports.jobCreate = async (req, res, next) => {
+exports.createJob = async (req, res, next) => {
   try {
-    const job = new Job(req.body);
-    const jobCreated = await job.save();
-    if (jobCreated) {
-      res.status(200).json({
-        message: 'Job created successfully',
+    const validationSchema = joi.object({
+      jobName: joi.string().trim().required(),
+      jobSalary: joi.string().trim().required(),
+      jobCategory: joi.string().trim().required(),
+      jobCompanyName: joi.string().trim().required(),
+      jobDescription: joi.string().trim().min(10).max(500)
+        .required(),
+      jobType: joi.string().trim().required(),
+      jobRequiredSkills: joi.array().required(),
+    });
+    const Validate = await validationSchema.validateAsync(req.body);
+    if (Validate) {
+      const {
+        jobName,
+        jobSalary,
+        jobCategory,
+        jobCompanyName,
+        jobDescription,
+        jobType,
+        jobRequiredSkills,
+      } = req.body;
+      const jobData = new Job({
+        jobName,
+        jobSalary,
+        jobCategory,
+        jobCompanyName,
+        jobDescription,
+        jobType,
+        jobRequiredSkills,
       });
+      const jobCreated = await jobData.save();
+      if (jobCreated) {
+        res.status(200).json({
+          message: 'Job created successfully',
+        });
+      }
     }
   } catch (error) {
     if (error.name === 'ValidationError') {

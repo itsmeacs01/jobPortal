@@ -108,8 +108,6 @@ exports.login = async (req, res, next) => {
       });
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
     next(error);
   }
 };

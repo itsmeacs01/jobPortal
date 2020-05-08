@@ -45,7 +45,7 @@ exports.createJob = async (req, res, next) => {
       });
       const jobCreated = await jobData.save();
       if (jobCreated) {
-        res.status(200).json({
+        res.status(201).json({
           message: 'Job created successfully',
         });
       }
@@ -137,7 +137,7 @@ exports.editJob = async (req, res, next) => {
           message: 'Job information not modified',
         });
       } else {
-        res.status(200).json({
+        res.status(201).json({
           message: 'Job information edited successfully',
         });
       }

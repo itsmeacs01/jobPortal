@@ -22,9 +22,5 @@ const employersSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
-
 });
 module.exports = mongoose.model('Employers', employersSchema);

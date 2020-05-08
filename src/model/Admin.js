@@ -6,9 +6,6 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  adminId: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
   adminCreatedAt: {
     type: Date,
     default: Date.now(),

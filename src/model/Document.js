@@ -9,9 +9,6 @@ const documentSchema = new mongoose.Schema({
   documentType: {
     type: String,
   },
-  documentId: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
   employeeId: {
     type: String,
   },

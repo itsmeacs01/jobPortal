@@ -16,7 +16,7 @@ exports.userSignup = async (req, res, next) => {
           allow: ['com', 'net'],
         },
       }),
-      phoneNumber: joi.string().trim().max(10).min(10),
+      phoneNumber: joi.string().trim().min(10).max(10),
       userRole: joi.string().trim(),
     });
     const validate = await validationSchema.validateAsync(req.body);

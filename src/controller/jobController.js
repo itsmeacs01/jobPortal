@@ -117,21 +117,19 @@ exports.editJob = async (req, res, next) => {
       const checkJob = await Job.findOne({
         _id: id,
       });
-      const editJobInfo = await Job.updateOne(
-        {
-          _id: id,
-        }, {
-          $set: {
-            jobName,
-            jobSalary,
-            jobCategory,
-            jobCompanyName,
-            jobDescription,
-            jobType,
-            jobRequiredSkills,
-          },
+      const editJobInfo = await Job.updateOne({
+        _id: id,
+      }, {
+        $set: {
+          jobName,
+          jobSalary,
+          jobCategory,
+          jobCompanyName,
+          jobDescription,
+          jobType,
+          jobRequiredSkills,
         },
-      );
+      });
       if (editJobInfo.nModified === 0) {
         res.status(304).json({
           message: 'Job information not modified',

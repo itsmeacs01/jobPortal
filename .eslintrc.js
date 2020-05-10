@@ -13,8 +13,9 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 11,
   },
   rules: {
+    'linebreak-style': ['error','windows']
   },
 };

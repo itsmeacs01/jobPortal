@@ -25,8 +25,6 @@ const jobSchema = new mongoose.Schema({
   jobDescription: {
     type: String,
     required: true,
-    min: 10,
-    max: 500,
   },
   jobType: {
     type: String,

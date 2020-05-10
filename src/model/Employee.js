@@ -10,10 +10,9 @@ const employeeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   address: {
     type: String,
-    min: 5,
-    max: 30,
   },
   skills: {
     type: Array,
@@ -22,8 +21,6 @@ const employeeSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    min: 6,
-    max: 20,
   },
 });
 module.exports = mongoose.model('Employee', employeeSchema);

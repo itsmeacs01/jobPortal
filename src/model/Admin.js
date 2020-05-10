@@ -20,8 +20,6 @@ const adminSchema = new mongoose.Schema({
   adminPassword: {
     type: String,
     required: true,
-    min: 6,
-    max: 20,
   },
   adminNumber: {
     type: Number,

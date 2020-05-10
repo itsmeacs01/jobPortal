@@ -13,10 +13,10 @@ exports.userSignup = async (req, res, next) => {
       email: joi.string().trim().email({
         minDomainSegments: 2,
         tlds: {
-          allow: ['com', 'net'],
+          allow: ['com', 'net', 'np'],
         },
       }),
-      phoneNumber: joi.string().trim().min(10).max(10),
+      phoneNumber: joi.string().max(10).min(10),
       userRole: joi.string().trim(),
     });
     const validate = await validationSchema.validateAsync(req.body);
@@ -88,7 +88,9 @@ exports.login = async (req, res, next) => {
         const token = await jwt.sign({
           id: checkUser.id,
           email: checkUser.email,
-        }, process.env.SECRET);
+        }, process.env.SECRET, {
+          expiresIn: '24h',
+        });
         if (token) {
           res.status(200).json({
             message: 'Logged in successfully',

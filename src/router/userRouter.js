@@ -2,7 +2,9 @@ const express = require('express');
 
 const userRouter = express.Router();
 
-const { checkAuth } = require('../middleware/UserAuth');
+const {
+  checkAuth,
+} = require('../middleware/UserAuth');
 
 
 const {
@@ -11,9 +13,7 @@ const {
 } = require('../controller/userController.js');
 
 userRouter.post('/signup', userSignup);
-userRouter.post('/login', login);
-userRouter.get('/checking', checkAuth, (req, res) => {
-  console.log(req.userData);
-});
+userRouter.post('/login', checkAuth, login);
+
 
 module.exports = userRouter;

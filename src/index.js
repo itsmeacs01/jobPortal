@@ -7,6 +7,7 @@ const cors = require('cors');
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const volleyball = require('volleyball');
+const expressFileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -37,13 +38,16 @@ mongoose.connect(process.env.DB_URL, {
 const userRouter = require('./router/userRouter');
 const jobRouter = require('./router/jobRouter');
 // const adminRouter = require('./router/adminRouter');
+const documentRouter = require('./router/documentRouter');
 
 app.use(express.json());
 app.use(volleyball);
+app.use(expressFileUpload());
 
 app.use('/', userRouter);
 app.use('/job', jobRouter);
 // app.use('/admin', adminRouter);
+app.use('/document', documentRouter);
 
 const { notFound, errorHanlder } = require('./error');
 

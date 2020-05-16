@@ -6,6 +6,7 @@ const {
   checkAuth,
   employersAuth,
 } = require('../middleware/UserAuth');
+
 const {
   createJob,
   viewJob,

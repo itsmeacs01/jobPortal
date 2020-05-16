@@ -2,10 +2,6 @@ const express = require('express');
 
 const userRouter = express.Router();
 
-const {
-  checkAuth,
-} = require('../middleware/UserAuth');
-
 
 const {
   userSignup,
@@ -13,7 +9,6 @@ const {
 } = require('../controller/userController.js');
 
 userRouter.post('/signup', userSignup);
-userRouter.post('/login', checkAuth, login);
-
+userRouter.post('/login', login);
 
 module.exports = userRouter;

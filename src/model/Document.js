@@ -2,14 +2,7 @@ const mongoose = require('mongoose');
 
 const documentSchema = new mongoose.Schema({
 
-  documentName: {
-    type: String,
-    required: true,
-  },
-  documentType: {
-    type: String,
-  },
-  employeeId: {
+  name: {
     type: String,
   },
   uploadedAt: {

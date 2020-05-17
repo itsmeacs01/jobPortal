@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const documentSchema = new mongoose.Schema({
-
-  name: {
-    type: String,
+  userId: mongoose.Schema.Types.ObjectId,
+  document: {
+    type: Object,
   },
   uploadedAt: {
     type: Date,

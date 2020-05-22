@@ -1,7 +1,10 @@
 const express = require('express');
 
 const documentRouter = express.Router();
-const { checkAuth } = require('../middleware/UserAuth');
+const {
+  checkAuth,
+
+} = require('../middleware/UserAuth');
 const {
   uploadDocument,
 } = require('../controller/documentController');

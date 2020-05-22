@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const jobSchema = new mongoose.Schema({
+  userId: mongoose.Schema.Types.ObjectId,
 
   jobName: {
     type: String,
@@ -33,6 +34,9 @@ const jobSchema = new mongoose.Schema({
   jobRequiredSkills: {
     type: Array,
     required: true,
+  },
+  appliedBy: {
+    type: Array,
   },
 
 });

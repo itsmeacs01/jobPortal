@@ -4,7 +4,6 @@ const jobRouter = express.Router();
 
 const {
   checkAuth,
-  employersAuth,
 } = require('../middleware/UserAuth');
 
 const {
@@ -12,11 +11,13 @@ const {
   viewJob,
   deleteJob,
   editJob,
+  applyJob,
 } = require('../controller/jobController');
 
 jobRouter.get('/view', checkAuth, viewJob);
-jobRouter.post('/create', employersAuth, createJob);
-jobRouter.delete('/delete/:id', employersAuth, deleteJob);
-jobRouter.patch('/edit/:id', employersAuth, editJob);
+jobRouter.post('/create', checkAuth, createJob);
+jobRouter.delete('/delete/:id', checkAuth, deleteJob);
+jobRouter.patch('/edit/:id', checkAuth, editJob);
+jobRouter.patch('/apply/:id', checkAuth, applyJob);
 
 module.exports = jobRouter;

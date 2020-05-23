@@ -210,11 +210,67 @@ exports.applyJob = async (req, res, next) => {
         });
       }
     } else {
-      res.send(401).json({
+      res.status(401).json({
         message: 'you are not a employee',
       });
     }
   } catch (error) {
+    next(error);
+  }
+};
+
+exports.cancelApplyJob = async (req, res, next) => {
+  try {
+    if (req.userData.userRole === 'employee') {
+      const {
+        id,
+      } = req.params;
+      const findJob = await Job.findOne({
+        _id: id,
+      });
+      if (findJob) {
+        const userId = req.userData.id;
+
+        const checkAppliedUserId = await Job.findOne(
+          {
+            $and: [
+              { _id: id }, { appliedBy: { $all: [userId] } },
+            ],
+          },
+        );
+        if (checkAppliedUserId) {
+          const deleteAppliedUser = await Job.update({
+            _id: id,
+          },
+          {
+            $pull: {
+              appliedBy: userId,
+            },
+          });
+          if (deleteAppliedUser) {
+            res.status(200).json({
+              message: 'removed applied job successfully',
+            });
+          }
+        }
+        if (!checkAppliedUserId) {
+          res.status(403).json({
+            message: 'deleted the applied post || not applied!',
+          });
+        }
+      }
+      if (!findJob) {
+        res.status(400).json({
+          message: 'Job do not exists',
+        });
+      }
+    } else {
+      res.status(401).json({
+        message: 'you are not a employee',
+      });
+    }
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };

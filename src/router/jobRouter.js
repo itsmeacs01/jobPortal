@@ -12,6 +12,7 @@ const {
   deleteJob,
   editJob,
   applyJob,
+  cancelApplyJob,
 } = require('../controller/jobController');
 
 jobRouter.get('/view', checkAuth, viewJob);
@@ -19,5 +20,6 @@ jobRouter.post('/create', checkAuth, createJob);
 jobRouter.delete('/delete/:id', checkAuth, deleteJob);
 jobRouter.patch('/edit/:id', checkAuth, editJob);
 jobRouter.patch('/apply/:id', checkAuth, applyJob);
+jobRouter.patch('/cancel/apply/:id', checkAuth, cancelApplyJob);
 
 module.exports = jobRouter;

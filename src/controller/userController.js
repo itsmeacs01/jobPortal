@@ -113,3 +113,38 @@ exports.login = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const {
+      id,
+    } = req.params;
+    const findUser = await User.findOne({
+      _id: id,
+    });
+    if (findUser) {
+      const userId = req.userData.id;
+      if (userId === id) {
+        const {
+          password,
+        } = req.body;
+        console.log(password);
+        const userPassword = req.userData.password;
+        console.log(userPassword);
+        res.send('hello valid user');
+      } else {
+        res.status(401).json({
+          message: 'unauthorized user',
+        });
+      }
+    }
+    if (!findUser) {
+      res.status(400).json({
+        message: 'user do not exists!',
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};

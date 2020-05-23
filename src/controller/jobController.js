@@ -13,10 +13,6 @@ exports.viewJob = async (req, res, next) => {
 
 exports.createJob = async (req, res, next) => {
   try {
-    const {
-      id,
-    } = req.userData;
-
     if (req.userData.userRole === 'employers') {
       const validationSchema = joi.object({
         jobName: joi.string().trim().required(),
@@ -39,6 +35,9 @@ exports.createJob = async (req, res, next) => {
           jobType,
           jobRequiredSkills,
         } = req.body;
+        const {
+          id,
+        } = req.userData;
         const jobData = new Job({
           userId: id,
           jobName,
@@ -164,46 +163,58 @@ exports.editJob = async (req, res, next) => {
   }
 };
 
-// exports.applyJob = async (req, res, next) => {
-//   try {
-//     if (req.userData.userRole === 'employee') {
-//       const {
-//         id,
-//       } = req.params;
-//       const findJob = await Job.findOne({
-//         _id: id,
-//       });
-//       if (findJob) {
-//         const userId = req.userData.id;
-//         const checkAppliedUserId = await Job.appliedBy.findOne({
-//           userId,
-//         });
-//         if (checkAppliedUserId) {
-//           res.status(403).json({
-//             message: 'already applied',
-//           });
-//         }
-//         if (!checkAppliedUserId) {
-//           const addAppliedUser = await Job.appliedBy.push(userId);
-//           if (addAppliedUser) {
-//             res.status(200).json({
-//               message: 'job applied successfully',
-//             });
-//           }
-//         }
-//       }
-//       if (!findJob) {
-//         res.status(400).json({
-//           message: 'Job do not exists',
-//         });
-//       }
-//     } else {
-//       res.send(401).json({
-//         message: 'you are not a employee',
-//       });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     next(error);
-//   }
-// };
+exports.applyJob = async (req, res, next) => {
+  try {
+    if (req.userData.userRole === 'employee') {
+      const {
+        id,
+      } = req.params;
+      const findJob = await Job.findOne({
+        _id: id,
+      });
+      if (findJob) {
+        const userId = req.userData.id;
+
+        const checkAppliedUserId = await Job.findOne(
+          {
+            $and: [
+              { _id: id }, { appliedBy: { $all: [userId] } },
+            ],
+          },
+        );
+        if (checkAppliedUserId) {
+          res.status(403).json({
+            message: 'already applied',
+          });
+        }
+        if (!checkAppliedUserId) {
+          const addAppliedUser = await Job.updateOne({
+            _id: id,
+          },
+          {
+            $push: {
+              appliedBy: userId,
+            },
+
+          });
+          if (addAppliedUser) {
+            res.status(200).json({
+              message: 'job applied successfully',
+            });
+          }
+        }
+      }
+      if (!findJob) {
+        res.status(400).json({
+          message: 'Job do not exists',
+        });
+      }
+    } else {
+      res.send(401).json({
+        message: 'you are not a employee',
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

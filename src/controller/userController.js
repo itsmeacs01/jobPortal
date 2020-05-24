@@ -128,10 +128,23 @@ exports.deleteUser = async (req, res, next) => {
         const {
           password,
         } = req.body;
-        console.log(password);
         const userPassword = req.userData.password;
-        console.log(userPassword);
-        res.send('hello valid user');
+        const verifyUser = await bcrypt.compareSync(password, userPassword);
+        if (verifyUser) {
+          const removeUser = await User.findOneAndDelete({
+            _id: id,
+          });
+          if (removeUser) {
+            res.status(200).json({
+              message: 'user deleted successfully',
+            });
+          }
+        }
+        if (!verifyUser) {
+          res.status(401).json({
+            message: 'unauthorized user',
+          });
+        }
       } else {
         res.status(401).json({
           message: 'unauthorized user',
@@ -144,7 +157,6 @@ exports.deleteUser = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

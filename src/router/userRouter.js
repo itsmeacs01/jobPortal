@@ -10,10 +10,12 @@ const {
   userSignup,
   login,
   deleteUser,
+  forgotPassword,
 } = require('../controller/userController.js');
 
 userRouter.post('/signup', userSignup);
 userRouter.post('/login', login);
 userRouter.delete('/user/delete/:id', checkAuth, deleteUser);
+userRouter.post('/forgot/password', forgotPassword);
 
 module.exports = userRouter;

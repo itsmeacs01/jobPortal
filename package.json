@@ -21,7 +21,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.3",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.4.6",
     "path": "^0.12.7",
+    "uuid": "^8.1.0",
     "volleyball": "^1.5.1"
   },
   "devDependencies": {

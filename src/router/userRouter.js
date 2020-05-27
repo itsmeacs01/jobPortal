@@ -4,7 +4,7 @@ const userRouter = express.Router();
 
 const {
   checkAuth,
-} = require('../middleware/UserAuth')
+} = require('../middleware/UserAuth');
 
 const {
   userSignup,

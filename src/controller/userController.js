@@ -231,8 +231,56 @@ exports.forgotPassword = async (req, res, next) => {
 
 exports.confirmPassword = async (req, res, next) => {
   try {
-
+    const { token } = req.params;
+    const findToken = await User.findOne(
+      {
+        $and: [
+          { resetToken: token }, { resetTokenExpiresAt: { $gt: Date.now() } },
+        ],
+      },
+    );
+    if (findToken) {
+      const validationSchema = joi.object({
+        newPassword: joi.string().min(8).required(),
+      });
+      const validate = await validationSchema.validateAsync(req.body);
+      if (validate) {
+        const {
+          newPassword,
+        } = req.body;
+        const hash = bcrypt.hashSync(newPassword, 12);
+        const changePassword = await User.updateOne(
+          {
+            $and: [
+              { resetToken: token }, { resetTokenExpiresAt: { $gt: Date.now() } },
+            ],
+          }, {
+            $set: {
+              password: hash,
+              resetToken: null,
+            },
+          },
+        );
+        if (changePassword.nModified === 0) {
+          res.status(304).json({
+            message: 'cannot change password, try again later',
+          });
+        } else {
+          res.status(200).json({
+            message: 'password changed successfully',
+          });
+        }
+      }
+    }
+    if (!findToken) {
+      res.status(400).json({
+        message: 'invalid or expired token',
+      });
+    }
   } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.send(422);
+    }
     next(error);
   }
 };

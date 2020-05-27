@@ -200,27 +200,23 @@ exports.forgotPassword = async (req, res, next) => {
           to: email,
           subject: `reset password | ${process.env.COMPANY_URL}`,
           text: 'reset your password via link given below!',
-          html: `<h1><a href="${process.env.ORIGIN}/forgot/password/${resetToken}">Reset Now</a></h1>`,
+          html: `<h1>
+          <h2>${process.env.ORIGIN}/confirm/password/${resetToken}</h2>
+          <a href="${process.env.ORIGIN}/confirm/password/${resetToken}">Reset Now</a>
+          </h1>`,
         };
-        const sendMail = await transporter.sendMail(mailOption, (err, info) => {
+        await transporter.sendMail(mailOption, (err, info) => {
           if (err) {
             res.status(422).json({
               message: 'unable to send token',
             });
           }
-          console.log(err);
-          console.log(info);
+          if (!err) {
+            res.status(200).json({
+              message: 'check your mail',
+            });
+          }
         });
-        if (sendMail) {
-          res.status(200).json({
-            message: 'check your mail',
-          });
-        }
-        if (!sendMail) {
-          res.status(422).json({
-            message: 'Didn\'t get a link, Try Again',
-          });
-        }
       }
     }
     if (!checkUser) {
@@ -229,7 +225,14 @@ exports.forgotPassword = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    next(error);
+  }
+};
+
+exports.confirmPassword = async (req, res, next) => {
+  try {
+
+  } catch (error) {
     next(error);
   }
 };

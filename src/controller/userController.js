@@ -178,7 +178,7 @@ exports.forgotPassword = async (req, res, next) => {
       }, {
         $set: {
           resetToken,
-          resetTokenExpiresAt: Date.now() + 6000,
+          resetTokenExpiresAt: Date.now() + 600,
         },
       });
       if (updateToken.nModified === 0) {
@@ -205,6 +205,7 @@ exports.forgotPassword = async (req, res, next) => {
           <a href="${process.env.ORIGIN}/confirm/password/${resetToken}">Reset Now</a>
           </h1>`,
         };
+        // eslint-disable-next-line no-unused-vars
         await transporter.sendMail(mailOption, (err, info) => {
           if (err) {
             res.status(422).json({
@@ -251,23 +252,52 @@ exports.confirmPassword = async (req, res, next) => {
         const hash = bcrypt.hashSync(newPassword, 12);
         const changePassword = await User.updateOne(
           {
-            $and: [
-              { resetToken: token }, { resetTokenExpiresAt: { $gt: Date.now() } },
-            ],
+            resetToken: token,
           }, {
             $set: {
               password: hash,
               resetToken: null,
+              resetTokenExpiresAt: null,
             },
           },
         );
-        if (changePassword.nModified === 0) {
-          res.status(304).json({
-            message: 'cannot change password, try again later',
-          });
-        } else {
+        if (changePassword) {
           res.status(200).json({
             message: 'password changed successfully',
+          });
+          const transporter = nodeMailer.createTransport({
+            host: process.env.TRANSPORT_HOST,
+            port: process.env.TRANSPORT_PORT,
+            secure: true,
+            auth: {
+              user: process.env.TRANSPORT_USER,
+              pass: process.env.TRANSPORT_PASS,
+            },
+          });
+          req.userData = findToken;
+          const userEmail = req.userData.email;
+          const mailOption = {
+            from: process.env.MAILOPTION_FROM,
+            to: userEmail,
+            subject: `password changed | ${process.env.COMPANY_URL}`,
+            text: 'your password was changed recently, is this you?',
+            html: `<h1>your ${process.env.COMPANY_URL} password was changed recently</h1>`,
+          };
+          // eslint-disable-next-line no-unused-vars
+          await transporter.sendMail(mailOption, (err, info) => {
+            if (err) {
+              res.status(422).json({
+                message: 'unable to send mail',
+              });
+            }
+            if (!err) {
+              res.status(200);
+            }
+          });
+        }
+        if (!changePassword) {
+          res.status(408).json({
+            message: 'unable to change password, try again later',
           });
         }
       }

@@ -77,6 +77,7 @@ exports.login = async (req, res, next) => {
       usernameOrEmail,
       password,
     } = req.body;
+    console.log(req.body);
     const checkUser = await User.findOne({
       $or: [{
         username: usernameOrEmail,

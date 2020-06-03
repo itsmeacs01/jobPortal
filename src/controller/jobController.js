@@ -81,13 +81,13 @@ exports.deleteJob = async (req, res, next) => {
       });
       if (findJob) {
         const employerId = req.userData.id;
-        const checkJobCreatedUserId = await Job.findOne(
-          {
-            $and: [
-              { _id: id }, { userId: employerId },
-            ],
-          },
-        );
+        const checkJobCreatedUserId = await Job.findOne({
+          $and: [{
+            _id: id,
+          }, {
+            userId: employerId,
+          }],
+        });
         if (checkJobCreatedUserId) {
           const deleteJob = await Job.findOneAndDelete({
             _id: id,
@@ -130,13 +130,13 @@ exports.editJob = async (req, res, next) => {
       });
       if (findJob) {
         const employerId = req.userData.id;
-        const checkJobCreatedUserId = await Job.findOne(
-          {
-            $and: [
-              { _id: id }, { userId: employerId },
-            ],
-          },
-        );
+        const checkJobCreatedUserId = await Job.findOne({
+          $and: [{
+            _id: id,
+          }, {
+            userId: employerId,
+          }],
+        });
         if (checkJobCreatedUserId) {
           const validationSchema = joi.object({
             jobName: joi.string().trim().required(),
@@ -224,13 +224,15 @@ exports.applyJob = async (req, res, next) => {
       if (findJob) {
         const userId = req.userData.id;
 
-        const checkAppliedUserId = await Job.findOne(
-          {
-            $and: [
-              { _id: id }, { appliedBy: { $all: [userId] } },
-            ],
-          },
-        );
+        const checkAppliedUserId = await Job.findOne({
+          $and: [{
+            _id: id,
+          }, {
+            appliedBy: {
+              $all: [userId],
+            },
+          }],
+        });
         if (checkAppliedUserId) {
           res.status(403).json({
             message: 'already applied',
@@ -239,8 +241,7 @@ exports.applyJob = async (req, res, next) => {
         if (!checkAppliedUserId) {
           const addAppliedUser = await Job.updateOne({
             _id: id,
-          },
-          {
+          }, {
             $push: {
               appliedBy: userId,
             },
@@ -280,18 +281,19 @@ exports.cancelApplyJob = async (req, res, next) => {
       if (findJob) {
         const userId = req.userData.id;
 
-        const checkAppliedUserId = await Job.findOne(
-          {
-            $and: [
-              { _id: id }, { appliedBy: { $all: [userId] } },
-            ],
-          },
-        );
+        const checkAppliedUserId = await Job.findOne({
+          $and: [{
+            _id: id,
+          }, {
+            appliedBy: {
+              $all: [userId],
+            },
+          }],
+        });
         if (checkAppliedUserId) {
           const deleteAppliedUser = await Job.update({
             _id: id,
-          },
-          {
+          }, {
             $pull: {
               appliedBy: userId,
             },
@@ -319,6 +321,41 @@ exports.cancelApplyJob = async (req, res, next) => {
       });
     }
   } catch (error) {
+    next(error);
+  }
+};
+
+exports.searchJobs = async (req, res, next) => {
+  try {
+    const {
+      text,
+    } = req.params;
+
+    const searchJobs = await Job.find({
+      $or: [{
+        jobName: {
+          $regex: text,
+          $options: 'i',
+        },
+      },
+      {
+        jobRequiredSkills: {
+          $regex: text,
+          $options: 'i',
+        },
+      },
+      ],
+    });
+    if (searchJobs) {
+      res.send(searchJobs);
+    }
+    if (!searchJobs) {
+      res.status(400).json({
+        message: 'not found',
+      });
+    }
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };

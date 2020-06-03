@@ -1,6 +1,6 @@
 import React from 'react';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-
+import Axios from 'axios';
 import './form.scss';
 
 const Field = props => {
@@ -106,6 +106,15 @@ class Form extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+   const data = {
+     usernameOrEmail: this.state.userName,
+     password: this.state.password,
+     role: this.state.role,
+   } 
+   console.log(data);
+   Axios.post('http://localhost:5000/login',data).then(res => {
+    localStorage.setItem('token',res.data.token)
+   }).catch(err => console.log(err));
   };
 
   renderSubmitButtonLabel = () => {

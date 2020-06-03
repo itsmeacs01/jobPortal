@@ -19,9 +19,7 @@ const {
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
 });
-app.use(cors({
-  origin: ORIGIN,
-}));
+app.use(cors());
 
 // Database Connection
 

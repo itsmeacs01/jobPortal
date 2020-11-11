@@ -1,23 +1,36 @@
-email for any help: { 
-    " aashishcsit16@oic.edu.np "
-    };
-or comment in the comment section.
-
-..........   Thank You   ..........
+<h1 align="center" >Job Portal</h1>
+***
+***
 
 
-################################## scripts ##############################################
+** <h2 align="center" >SCRIPTS</h2> **
 
-1. To start backend ( server ):
-   $ npm install // installs all required node moduels
+***
+***
+<h2 align="left">To run the server:</h1>
+```
+>   $ npm install       //  To install all required node moduels for server.
+>   $ npm run dev       //  To start the server.
+```
+***
+***
 
-   $ npm run dev // starts at  http://localhost:5000/
+***
+***
+<h2 align="left">To run the client application:</h1>
+```
+>   $ cd client         //  To go into the client directory.
+>   $ npm install       //  To install all required node moduels for forntend.
+>   $ npm start         //  To run the client application.
+ ```
+ ***
+ ***
+ 
+ ***
+ ```
+ For help mail me:  -> [email](aashishcsit16@oic.edu.np "Email")
+ ```
+ ***
+ 
 
-
-...............................................................................................
-
-2. To start frontend ( react app ):
-
-    $ cd client // to go into the client directory
-    $ npm install // installs all required node moduels
-    $ npm start // starts at http://localhost:3000/
+<h3 align="center" >** ..........   Thank You   .......... **</h3>

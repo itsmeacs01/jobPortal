@@ -23,12 +23,12 @@
  ``` 
  
  
+ ---
  
  <h4 align="left"> For any help:</h4>
- 
- ```
- ->  aashishcsit16@oic.edu.np
- ```
+
+[Email](aashishcsit16@oic.edu.np "Email")
+
  
 
 <h3 align="center" >*** ..........   Thank You   .......... ***</h3>

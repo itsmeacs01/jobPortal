@@ -27,7 +27,7 @@
  
  <h4 align="left"> For any help:</h4>
 
-[Email](aashishcsit16@oic.edu.np "Email")
+Email : [ aashishcsit16@oic.edu.np ]
 
  
 
